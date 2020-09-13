@@ -18,6 +18,6 @@ router.put("/api/books/:id", bookController.updateBook);
 router.delete("/api/books/:id", bookController.deleteBook);
 
 // * Search
-// router.get("/api/books/search", bookController.searchBooks);
+router.get("/api/search", bookController.searchBooks);
 
 export default router

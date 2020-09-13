@@ -1,13 +1,12 @@
 import Book from '../models/Book'
 import asyncHandler from 'express-async-handler'
-import chalk from 'chalk'
 import Fuse from 'fuse.js'
 
 // * @route GET /api/books
 // @desc    Get All Book
 // @access  Public
 export const getBooks = asyncHandler(async (req: any, res: any) => {
-    const book = await Book.find();
+    const book = await Book.find().lean();
     if (book.length === 0) {
         return res
             .status(404)
@@ -87,31 +86,29 @@ export const deleteBook = asyncHandler(async (req: any, res: any) => {
     res.status(200).json({ success: true, message: "Book Succesfull Delete" });
 });
 
-// * @route GET /api/books/search
+// * @route GET /api/search
 // @desc    Search Book by Query
 // @access  Public
-// export let searchBooks = asyncHandler(async (req: any, res: any) => {
-//     const list = await Book.find();
-//     console.log(list)
-//     const query = req.query.q;
-//     console.log(query)
+export const searchBooks = asyncHandler(async (req: any, res: any) => {
+    const list = await Book.find().lean();
+    const query = req.query.q;
 
-//     if (!query) {
-//         return res
-//             .status(400)
-//             .json({ success: false, message: "No Query Entered" });
-//     }
+    if (!query) {
+        return res
+            .status(400)
+            .json({ success: false, message: "No Query Entered", total: list.length, data: list });
+    }
 
-//     // * Fuse JS here
-//     const options = {
-//         keys: ["name", "picture"],
-//         includeScore: true,
-//     };
-//     const fuse = new Fuse(list, options);
-//     const result = fuse.search(query);
-//     if (result.length == 0) {
-//         return res.status(404).json({ success: false, message: "No Data Matched" });
-//     }
+    // * Fuse JS here
+    const options = {
+        keys: ["name", "genre"],
+        includeScore: true,
+    };
+    const fuse = new Fuse(list, options);
+    const result = fuse.search(query);
+    if (result.length == 0) {
+        return res.status(404).json({ success: false, message: "No Data Matched" });
+    }
 
-//     res.status(200).json({ success: true, total: result.length, data: result });
-// });
+    res.status(200).json({ success: true, total: result.length, data: result });
+});
