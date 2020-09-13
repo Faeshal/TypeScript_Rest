@@ -101,7 +101,7 @@ export const searchBooks = asyncHandler(async (req: any, res: any) => {
 
     // * Fuse JS here
     const options = {
-        keys: ["name", "genre"],
+        keys: ["name", "genre", "author"],
         includeScore: true,
     };
     const fuse = new Fuse(list, options);
