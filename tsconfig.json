@@ -10,6 +10,7 @@
         "removeComments": true,
         /* Source Map Options */
         "sourceRoot": "./src",
-        "inlineSourceMap": true
+        "inlineSourceMap": true,
+        "skipLibCheck": true
       }
 }
