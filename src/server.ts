@@ -1,6 +1,6 @@
 import express from "express"
 import chalk from "chalk"
-import helmet from "helmet";
+import helmet from "helmet"
 import morgan from "morgan"
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -28,12 +28,12 @@ mongoose.connect(CONNECTION_URI, {
     if (err) {
         console.log(chalk.red.inverse(err))
     }
-    console.log(chalk.blueBright("MongoDB Connected"))
+    console.log(chalk.blueBright("MongoDB is Connected"))
 });
 
 
 app.get("/", (req: any, res: any, next: any) => {
-    res.status(200).json({ succes: true, message: "Hello From Typescript" })
+    res.status(200).json({ succes: true, message: "Hello From NodeJS Typescript" })
 })
 
 app.listen(PORT, (err: any) => {

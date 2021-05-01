@@ -1,15 +1,15 @@
 {
     "compilerOptions": {
         /* Basic Options */
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
         "outDir": "./dist",
         /* Strict Type-Checking Options */
         "strict": true,      
         "esModuleInterop": true,
+        "removeComments": true,
         /* Source Map Options */
         "sourceRoot": "./src",
         "inlineSourceMap": true
       }
-    
 }
