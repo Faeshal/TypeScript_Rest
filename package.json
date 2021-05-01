@@ -31,8 +31,8 @@
     "express-async-handler": "^1.1.4",
     "fuse.js": "^6.4.1",
     "helmet": "^4.1.1",
-    "mongoose": "^5.10.5",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
-  }
+  },
+  "devDependencies": {}
 }
