@@ -1,16 +1,19 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import chalk from "chalk";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
+import log4js from "log4js";
 import bookRoutes from "./routes/book";
 
 const app: any = express();
 const PORT: number = 3000;
 const CONNECTION_URI: string = "mongodb://localhost:27017/book_ts";
+const log = log4js.getLogger("entrypoint");
+log.level = "debug";
 
-// * Security & Primary
+// * Security & Primary & Logging
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(cors());
@@ -29,13 +32,13 @@ mongoose.connect(
   },
   (err) => {
     if (err) {
-      console.log(chalk.red.inverse(err));
+      log.error(err);
     }
-    console.log(chalk.blueBright("MongoDB is Connected"));
+    log.info("MongoDB is Connected");
   }
 );
 
-app.get("/", (req: any, res: any, next: any) => {
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res
     .status(200)
     .json({ succes: true, message: "Hello From NodeJS Typescript" });
@@ -43,7 +46,7 @@ app.get("/", (req: any, res: any, next: any) => {
 
 app.listen(PORT, (err: any) => {
   if (err) {
-    console.log(chalk.red.inverse(err));
+    log.error(err);
   }
-  console.log(chalk.green.inverse(`Server Up on Port: ${PORT}`));
+  log.info(`Server Up on Port: ${PORT}`);
 });

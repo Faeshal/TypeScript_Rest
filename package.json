@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "tsc",
     "watch-ts": "tsc -w",
     "start": "nodemon dist/server.js",
     "dev": "nodemon src/server.ts",
@@ -31,9 +32,9 @@
     "express-async-handler": "^1.1.4",
     "fuse.js": "^6.4.1",
     "helmet": "^4.1.1",
+    "log4js": "^6.9.1",
     "mongoose": "^5.12.7",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.4"
-  },
-  "devDependencies": {}
+    "nodemon": "^3.0.1"
+  }
 }
